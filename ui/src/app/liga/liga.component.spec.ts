@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpieltagComponent } from './spieltag.component';
+import { LigaComponent } from './liga.component';
 
-describe('SpieltagComponent', () => {
-  let component: SpieltagComponent;
-  let fixture: ComponentFixture<SpieltagComponent>;
+describe('LigaComponent', () => {
+  let component: LigaComponent;
+  let fixture: ComponentFixture<LigaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpieltagComponent ]
+      declarations: [ LigaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpieltagComponent);
+    fixture = TestBed.createComponent(LigaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

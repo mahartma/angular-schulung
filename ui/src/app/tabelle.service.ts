@@ -9,8 +9,9 @@ export class TabelleService {
 
   constructor(private httpClient: HttpClient) {}
 
-  aktuelleTabelle() : Observable<TabelleMannschaft[]> {
-    return <Observable<TabelleMannschaft[]>>this.httpClient.get('https://www.openligadb.de/api/getbltable/bl1/2018');
+  tabelle(liga: Liga) : Observable<TabelleMannschaft[]> {
+    let url = 'https://www.openligadb.de/api/getbltable/'+liga+'/2018';
+    return <Observable<TabelleMannschaft[]>>this.httpClient.get(url);
   }
 }
 
@@ -18,4 +19,9 @@ export interface TabelleMannschaft {
   TeamName: string
   Points: number
   TeamIconUrl: string
+}
+
+export enum Liga {
+  ErsteLiga = 'bl1',
+  ZweiteLiga = 'bl2'
 }

@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {TabelleMannschaft, TabelleService} from "../tabelle.service";
+import {Component, OnInit} from '@angular/core';
+import {Liga, TabelleMannschaft, TabelleService} from "../tabelle.service";
 import {Observable} from "rxjs";
 
 @Component({
@@ -9,15 +9,26 @@ import {Observable} from "rxjs";
 })
 export class BundesligaTabelleComponent implements OnInit {
   private tabelle: Observable<TabelleMannschaft[]>;
+  private _liga: Liga;
 
-  constructor(private tabelleService : TabelleService) { }
+  constructor(private tabelleService: TabelleService) {
+  }
 
   ngOnInit() {
-    this.tabelle = this.tabelleService.aktuelleTabelle();
+    this.liga = Liga.ErsteLiga;
+  }
+
+  set liga(liga: Liga) {
+    this._liga = liga;
+    this.tabelle = this.tabelleService.tabelle(liga);
     this.tabelle
-        .subscribe(data=>
-          console.log(data)
-        );
+      .subscribe(data =>
+        console.log(data)
+      );
+  }
+
+  get liga() {
+    return this._liga;
   }
 
 }
