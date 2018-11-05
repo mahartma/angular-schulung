@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {TabelleMannschaft, TabelleService} from "../tabelle.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-bundesliga-tabelle',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bundesliga-tabelle.component.css']
 })
 export class BundesligaTabelleComponent implements OnInit {
+  private tabelle: Observable<TabelleMannschaft[]>;
 
-  constructor() { }
+  constructor(private tabelleService : TabelleService) { }
 
   ngOnInit() {
+    this.tabelle = this.tabelleService.aktuelleTabelle();
+    this.tabelle
+        .subscribe(data=>
+          console.log(data)
+        );
   }
 
 }

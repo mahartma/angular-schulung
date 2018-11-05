@@ -1,1 +1,9 @@
 <app-spieltag [spieltag]="5"></app-spieltag>
+
+<table>
+  <tr *ngFor="let mannschaft of tabelle | async">
+    <td><img width="20px" [src]="mannschaft.TeamIconUrl" /></td>
+    <td>{{mannschaft.TeamName}}</td>
+    <td>{{mannschaft.Points}}</td>
+  </tr>
+</table>
