@@ -8,7 +8,6 @@ import {Observable} from "rxjs";
   styleUrls: ['./bundesliga-tabelle.component.css']
 })
 export class BundesligaTabelleComponent implements OnInit {
-  private tabelle: Observable<TabelleMannschaft[]>;
   private _liga: Liga;
 
   constructor(private tabelleService: TabelleService) {
@@ -20,11 +19,7 @@ export class BundesligaTabelleComponent implements OnInit {
 
   set liga(liga: Liga) {
     this._liga = liga;
-    this.tabelle = this.tabelleService.tabelle(liga);
-    this.tabelle
-      .subscribe(data =>
-        console.log(data)
-      );
+    this.tabelleService.loadTabelle(liga);
   }
 
   get liga() {

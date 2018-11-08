@@ -1,17 +1,20 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TabelleService {
+  private tabelleSubject: BehaviorSubject<TabelleMannschaft[]> = new BehaviorSubject([]);
+  public readonly tabelle$: Observable<TabelleMannschaft[]> = this.tabelleSubject.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
-  tabelle(liga: Liga) : Observable<TabelleMannschaft[]> {
+  loadTabelle(liga: Liga) : void {
     let url = 'https://www.openligadb.de/api/getbltable/'+liga+'/2018';
-    return <Observable<TabelleMannschaft[]>>this.httpClient.get(url);
+    (<Observable<TabelleMannschaft[]>>this.httpClient.get(url))
+      .subscribe(tabelle=> this.tabelleSubject.next(tabelle));
   }
 }
 
